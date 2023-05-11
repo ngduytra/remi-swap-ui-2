@@ -24,30 +24,32 @@ export const useWrapAndUnwrapSolIfNeed = () => {
       mint: string,
       amount: number | string,
     ): Promise<web3.Transaction | undefined> => {
-      if(!wallet) return
+      if(!wallet ||mint !== NATIVE_MINT.toBase58()) return
+    
       const tx = new web3.Transaction()
       const walletAddress = wallet.publicKey
       const wSolATA = await getAssociatedTokenAddress(
         NATIVE_MINT,
         new web3.PublicKey(walletAddress),
       )
-      const balance  = await getTokenBalance(wSolATA)
- 
-      if (mint !== NATIVE_MINT.toBase58() || balance === null || balance >= Number(amount)) return
+      const balance = 0
+      const isAccountExist = await checkAccount(wSolATA)
+      console.log('isAccountExist',isAccountExist)
+      if (!isAccountExist) {
+        const creatingATAIx = await createATAIx(
+          new web3.PublicKey(walletAddress),
+        )
+        tx.add(creatingATAIx)
+      }else {
+        const balance  = await getTokenBalance(wSolATA)
+        if (balance === null || balance >= Number(amount)) return
+      }
 
       const decimalizedAmount = utilsBN.decimalize(amount, SOL_DECIMALS)
       const decimalizedBalance = utilsBN.decimalize(balance, SOL_DECIMALS)
       const neededWrappedSol = decimalizedAmount.sub(decimalizedBalance)
       
       // Create token account to hold your wrapped SOL if haven't existed
-      const isAccountExist = checkAccount(wSolATA)
-      if (!isAccountExist) {
-        const creatingATAIx = await createATAIx(
-          new web3.PublicKey(walletAddress),
-        )
-        tx.add(creatingATAIx)
-      }
-      console.log('thong tin wrap => ', neededWrappedSol.toNumber(), 'balance wrapsol=> ', balance)
       const wSolIx = await createWrapSolIx(
         neededWrappedSol.toNumber(),
         new web3.PublicKey(walletAddress),
