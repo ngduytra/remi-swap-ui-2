@@ -6,6 +6,8 @@ import { useState } from 'react'
 import PoolAction from './poolAction'
 import { utilsBN } from 'helper/utilsBN'
 
+import './index.css'
+
 type PoolDetailPros = {
     poolAddress: Address
 }
@@ -15,7 +17,7 @@ const PoolDetail = ({poolAddress}: PoolDetailPros) => {
     const [ openModal, setOpenModal ] = useState(false)
 
     return (
-        <Card bodyStyle={{background: '#0050ff42'}} onClick={()=>setOpenModal(true)}>
+        <Card bodyStyle={{background: '#0050ff42', cursor:"pointer"}} onClick={()=>setOpenModal(true)} className='clickable'>
             <Row>
                 <Col span={24}>
                     <Typography.Text strong style={{color: '#219f85'}}>Address: </Typography.Text>
