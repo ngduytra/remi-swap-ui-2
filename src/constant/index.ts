@@ -1,3 +1,3 @@
 export const SOL_DECIMALS = 9
 export const SOL_ADDRESS = 'So11111111111111111111111111111111111111112'
-export const MOVE_ADDRESS = 'AhQw5rqsjmbgqmM8Dh9Kq6j6Ey7J1aidCA1wHgVD7d7V'
+export const MOVE_ADDRESS = '3gtmPQ7egiCSe5R2XwprRb23i5cCjymHGuucAT8wBRov'

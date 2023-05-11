@@ -4,7 +4,7 @@ import { useAnchorProvider } from './useAnchor'
 import { isAddress } from 'utils'
 
 const PROGRAM_ID = new web3.PublicKey(
-  '3gtmPQ7egiCSe5R2XwprRb23i5cCjymHGuucAT8wBRov',
+  '8SWNwwAd3Yi33gMVuVfheWWJkDLSMBnCr3mNiUAHVWcB',
 )
 export const useProgram = () => {
   const provider = useAnchorProvider()
