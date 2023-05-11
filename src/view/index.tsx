@@ -1,39 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, {  useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import { Col, Layout, Row } from 'antd'
 import { Content, Footer } from 'antd/lib/layout/layout'
 import Banner from './banner'
 import Home from './home'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from 'store'
-import { initUsers } from 'store/users.controller'
 import UILoader from 'uiloader'
 import Aos from 'aos'
+import PoolWatcher from 'watcher/pool.watcher'
 import 'aos/dist/aos.css'
 
 const App: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>()
-  const [loading, setLoading] = useState(true)
-
+  
   useEffect(function () {
     Aos.init({ duration: 1000 })
   }, [])
 
-  const loadData = useCallback(async () => {
-    if (!loading) return
-    await dispatch(initUsers())
-
-    setLoading(false)
-  }, [dispatch, loading])
-
-  useEffect(() => {
-    loadData()
-  }, [loadData])
 
   return (
     <UILoader>
       <Layout>
+        <PoolWatcher/>
         <Content>
           <Row justify="center">
             <Col span={24}>

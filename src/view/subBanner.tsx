@@ -6,7 +6,7 @@ const SubBanner = () => {
   return (
     <Row>
       <Col span={24}>
-        <img src={bg} alt="sol-shield" style={{ width: '100%' }} />
+        <img src={bg} alt="remi-swap" style={{ width: '100%' }} />
       </Col>
     </Row>
   )

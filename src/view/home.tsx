@@ -1,19 +1,18 @@
-import { Row, Col, Typography, Statistic } from 'antd'
-import { ContainerOutlined } from '@ant-design/icons'
+import { Row, Col} from 'antd'
 
-import Card from 'antd/lib/card/Card'
-import SubBanner from './subBanner'
-import { useSelector } from 'react-redux'
-import { AppState } from 'store'
 import CreatePool from 'components/createPool'
+import ListPool from 'components/listPool'
 
 const Home = () => {
  
 
   return (
-    <Row>
-      <Col span="8">
+    <Row justify={"center"} gutter={[36, 36]}>
+      <Col span="16">
         <CreatePool/>
+      </Col>
+      <Col span="16">
+        <ListPool/>
       </Col>
     </Row>
   )

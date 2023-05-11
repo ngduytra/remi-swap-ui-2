@@ -1,6 +1,5 @@
 import { Row, Col, Space } from 'antd'
 
-import UploadBackground from 'static/images/upload.png'
 import MenuHeader from 'components/header'
 
 const Banner = () => {
@@ -10,7 +9,7 @@ const Banner = () => {
         <Row
           justify="center"
           style={{
-            height: '400px',
+           
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             padding: '8px 100px',

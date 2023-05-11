@@ -4,7 +4,7 @@ import { useAnchorProvider } from './useAnchor'
 import { isAddress } from 'utils'
 
 const PROGRAM_ID = new web3.PublicKey(
-  '4xKxo3gkzdmA4VnzsTbcVazwonAFndercdizR58fqagn',
+  '8SWNwwAd3Yi33gMVuVfheWWJkDLSMBnCr3mNiUAHVWcB',
 )
 export const useProgram = () => {
   const provider = useAnchorProvider()
@@ -22,7 +22,7 @@ export const PROGRAMS = {
 }
 
 export const deriveContractAddress = async (hash: number[]) => {
-  const [contract] = await web3.PublicKey.findProgramAddressSync(
+  const [contract] = web3.PublicKey.findProgramAddressSync(
     [Buffer.from('contract'), Buffer.from(hash)],
     PROGRAM_ID,
   )
@@ -206,6 +206,90 @@ export type RemiSwap = {
         {
           "name": "a",
           "type": "u64"
+        },
+        {
+          "name": "isRevert",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "addLiquidity",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "srcXAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "srcYAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasurer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "xTreasury",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "yTreasury",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "xToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "yToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "a",
+          "type": "u64"
+        },
+        {
+          "name": "b",
+          "type": "u64"
         }
       ]
     }
@@ -241,6 +325,31 @@ export type RemiSwap = {
     }
   ],
   "events": [
+    {
+      "name": "AddLiquidityEvent",
+      "fields": [
+        {
+          "name": "authority",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "pool",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "a",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "b",
+          "type": "u64",
+          "index": false
+        }
+      ]
+    },
     {
       "name": "CreatePoolEvent",
       "fields": [
@@ -298,6 +407,11 @@ export type RemiSwap = {
           "name": "b",
           "type": "u64",
           "index": false
+        },
+        {
+          "name": "isRevert",
+          "type": "bool",
+          "index": false
         }
       ]
     }
@@ -315,6 +429,11 @@ export type RemiSwap = {
     },
     {
       "code": 6002,
+      "name": "NotEnoughToken",
+      "msg": "Pool not enough token"
+    },
+    {
+      "code": 6003,
       "name": "NoBump",
       "msg": "Cannot find treasurer account"
     }
@@ -478,6 +597,90 @@ export const IDL: RemiSwap = {
         {
           "name": "a",
           "type": "u64"
+        },
+        {
+          "name": "isRevert",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "addLiquidity",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "srcXAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "srcYAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasurer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "xTreasury",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "yTreasury",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "xToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "yToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "a",
+          "type": "u64"
+        },
+        {
+          "name": "b",
+          "type": "u64"
         }
       ]
     }
@@ -513,6 +716,31 @@ export const IDL: RemiSwap = {
     }
   ],
   "events": [
+    {
+      "name": "AddLiquidityEvent",
+      "fields": [
+        {
+          "name": "authority",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "pool",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "a",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "b",
+          "type": "u64",
+          "index": false
+        }
+      ]
+    },
     {
       "name": "CreatePoolEvent",
       "fields": [
@@ -570,6 +798,11 @@ export const IDL: RemiSwap = {
           "name": "b",
           "type": "u64",
           "index": false
+        },
+        {
+          "name": "isRevert",
+          "type": "bool",
+          "index": false
         }
       ]
     }
@@ -587,6 +820,11 @@ export const IDL: RemiSwap = {
     },
     {
       "code": 6002,
+      "name": "NotEnoughToken",
+      "msg": "Pool not enough token"
+    },
+    {
+      "code": 6003,
       "name": "NoBump",
       "msg": "Cannot find treasurer account"
     }

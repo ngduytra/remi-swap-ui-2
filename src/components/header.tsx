@@ -1,33 +1,6 @@
-import { ContactsOutlined, HomeOutlined } from '@ant-design/icons'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
-import { Menu, MenuProps, Row, Col, Space, Typography } from 'antd'
-import { Link } from 'react-router-dom'
-
-const items: MenuProps['items'] = [
-  {
-    label: (
-      <Link to={'/home'}>
-        <Typography.Text style={{ color: 'inherit' }} strong>
-          Home
-        </Typography.Text>
-      </Link>
-    ),
-    key: 'home',
-    icon: <HomeOutlined />,
-  },
-  {
-    label: (
-      <Link to={'/management'}>
-        <Typography.Text style={{ color: 'inherit' }} strong>
-          Management
-        </Typography.Text>
-      </Link>
-    ),
-    key: 'management',
-    icon: <ContactsOutlined />,
-  },
-]
+import {  Row, Col, Space } from 'antd'
 
 function MenuHeader() {
   return (
