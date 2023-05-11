@@ -27,7 +27,7 @@ const conf: Record<Env, Conf> = {
    * Production configurations
    */
   production: {
-    endpoint: 'https://api.devnet.solana.com',
+    endpoint: 'https://api.testnet.solana.com',
   },
 }
 
